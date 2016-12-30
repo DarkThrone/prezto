@@ -12,4 +12,7 @@ fi
 
 # Customize to your needs...
 
+alias emacs="/usr/local/Cellar/emacs/24.5/bin/emacs"
+alias ctags="`brew --prefix` /bin/ctags"
+
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
