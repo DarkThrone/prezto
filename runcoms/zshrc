@@ -7,12 +7,26 @@
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+export USER_HOME=$HOME
+export GERO_INCLUDES="${USER_HOME}/gero-code"
 
-alias emacs="/usr/local/Cellar/emacs/24.5/bin/emacs"
-alias ctags="`brew --prefix` /bin/ctags"
+[[ -s "${GERO_INCLUDES}/alias.sh" ]] && source "${GERO_INCLUDES}/alias.sh"
 
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+[[ -s "${GERO_INCLUDES}/work/alias.sh" ]] && source "${GERO_INCLUDES}/work/alias.sh"
+
+[[ -s "${GERO_INCLUDES}/exports.sh" ]] && . "${GERO_INCLUDES}/exports.sh"
+
+[[ -s "${GERO_INCLUDES}/work/exports.sh" ]] && . "${GERO_INCLUDES}/work/exports.sh"
+
+[[ -s "${GERO_INCLUDES}/functions.sh" ]] && . "${GERO_INCLUDES}/functions.sh"
+
+[[ -s "${GERO_INCLUDES}/work/functions.sh" ]] && . "${GERO_INCLUDES}/work/functions.sh"
+
+[[ -s "${GERO_INCLUDES}/work/docker.sh" ]] && . "${GERO_INCLUDES}/work/docker.sh"
+
+# This loads pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
