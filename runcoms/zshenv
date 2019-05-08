@@ -4,43 +4,79 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-
 skip_global_compinit=1
+
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+#export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+function load_java {
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home"
+    export PATH="$JAVA_HOME/bin:$PATH"
+}
+
+function load_commerce {
+    export BIZBOX_HOME="/Users/gsgritta/atlassian/bizbox/scripts"
+    export PATH="$BIZBOX_HOME/common/bin:$BIZBOX_HOME/scripts/bizbox/bin:$HOME/atlassian/PLS/pulse-scripts/bin:$PATH"
+}
+
+function load_emacs {
+    export PATH="/Applications/Emacs.app/Contents/MacOS/bin:/Applications/Emacs.app/Contents/MacOS:$PATH"
+}
+
+function load_cargo {
+    export PATH="$HOME/.cargo/bin:$PATH"
+}
+
+function load_depot_tools {
+    export PATH="$HOME/oss-projects/depot_tools:$PATH"
+}
+
+function load_golang {
+    export GOPATH="${HOME}/go"
+    export GOROOT="/usr/local/opt/go/libexec"
+    export PATH="${GOPATH}/bin:${GOROOT}/bin:$PATH"
+}
+
+function load_nvm {
+    export NVM_DIR="/Users/gsgritta/.nvm"
+    export NVM_SCRIPT="$NVM_DIR/nvm.sh"
+    [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+}
+
+function load_rvm {
+    export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+}
+
+function load_sdkman {
+    export SDKMAN_DIR="/Users/gsgritta/.sdkman"
+    [[ -s "/Users/gsgritta/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/gsgritta/.sdkman/bin/sdkman-init.sh"
+}
+
+function load_pyenv {
+    export PYENV_VERSION="2.7.15"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+}
+
+# This loads pyenv
+load_java
+load_commerce
+load_cargo
+load_depot_tools
+load_emacs
+load_golang
+load_pyenv
+load_sdkman
+load_nvm
+load_rvm
+
+#prompt pure
+
+export PATH_SAVE=$PATH
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
-
-export PATH=$PATH:/Users/gsgritta/atlassian/PLS/pulse-scripts/bin
-
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home
-
-export GOPATH="${HOME}/go"
-export GOROOT="/usr/local/opt/go/libexec"
-
-export BIZBOX_HOME="/Users/gsgritta/atlassian/bizbox/scripts"
-
-export PATH="$HOME/.cargo/bin:/Users/gsgritta/oss-projects/depot_tools:$JAVA_HOME/bin:/Applications/Emacs.app/Contents/MacOS/bin:/Applications/Emacs.app/Contents/MacOS:$BIZBOX_HOME/common/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$BIZBOX_HOME/scripts/bizbox/bin:$HOME/atlassian/PLS/pulse-scripts/bin"
-
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-
-export PATH_SAVE=$PATH
-
-export SDKMAN_DIR="/Users/gsgritta/.sdkman"
-[[ -s "/Users/gsgritta/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/gsgritta/.sdkman/bin/sdkman-init.sh"
-
-export NVM_DIR="/Users/gsgritta/.nvm"
-export NVM_SCRIPT="$NVM_DIR/nvm.sh"
-[[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-# This loads pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"

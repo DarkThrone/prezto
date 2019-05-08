@@ -27,6 +27,4 @@ export GERO_INCLUDES="${USER_HOME}/gero-code"
 
 [[ -s "${GERO_INCLUDES}/work/docker.sh" ]] && . "${GERO_INCLUDES}/work/docker.sh"
 
-# This loads pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+[[ -s "${GERO_INCLUDES}/work/python.sh" ]] && . "${GERO_INCLUDES}/work/python.sh"
